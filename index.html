@@ -1,0 +1,240 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="index.css" />
+    <title>Landing</title>
+    
+</head>
+<body>
+    <main class="container">
+        <section id="nav__section" class="nav__section">
+            <div class="linkImagesDiv">
+                <a><img class="linkImages" src="/images/twitter_black.png"></a>
+                <a><img class="linkImages" src="/images/facebook_black.png"></a>
+                <a><img class="linkImages" src="/images/github2.png"></a>
+                <a><img class="linkImages" src="/images/linkedin_black.png"></a>
+            </div>
+            <div class="profilePicDiv">
+                <img src="/images/my_anime.png" alt="profile_picture"/>
+            </div>
+            
+                <nav>
+                    
+                    <ul class="nav__list">
+                        <li id="homeButton" class="active">HOME</li>
+                        <li id="aboutButton">ABOUT</li>
+                        <li id="expButton">EXPERIENCE</li>
+                        <li id="skillButton">SKILL</li>
+                    </ul>
+                    
+                </nav>
+                <small>designed by ChubbyCode 2019</small>
+        </section>
+        <section class="content__section">
+
+            <button id="close" class="closeBtn moveBtn">
+                    <span></span>
+            </button>
+            
+            <div id="landingPage" class="landing">
+            
+                <div id="landingImgDiv">
+                    <img  src="/images/my_anime.png" alt="profile_picture"/>
+                </div> 
+                <p id="landingPage_text">Hello my name is Emeka, I am a fullstack developer
+                        and you are welcome to my page, please help yur self
+                </p>
+                
+            </div>
+
+            <div id="about" class="about__me disappear" >
+                <h1>Hi I am Here</h1>
+            </div>
+            <div id="exp" class="experience disappear">
+                
+            </div>
+            <div id="skill" class="skill disappear">
+                <div class="skillImages">
+                    <img src="/images/html.png" alt="html"/>
+                    <img src="/images/css.png" alt="css"/>
+                    <img src="/images/javascript.png" alt="Javascript"/>
+                    <img src="/images/php.png" alt="php"/>
+                    <img src="/images/laravel.png" alt="Laravel"/>
+                    <img src="/images/nodejs.png" alt="NodeJs"/>
+                    <img src="/images/jquery.png" alt="Jquery"/>
+                    <img src="/images/postgresql.png" alt="postgreSql"/>
+                    
+                </div>
+                    
+            </div>
+            
+            <div id="myPopup" class="modal-box">
+            <header> <a href="#" class="js-modal-close close">×</a>
+            <h3 id="modal-head"></h3>
+            </header>
+            <div class="modal-body">
+            <p id="modal-content"></p>
+            <P>URL: <a id="modal-url" href="" target="_blank"></a></P>
+            </div>
+            </div>
+    
+        </section>
+    </main>
+   
+    <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="crossorigin="anonymous"></script> -->
+    <script src='bootstrap/js/jquery.js'></script>
+    <script>
+        $(document).ready(function(){
+
+            //experience thread array
+            var expThread = [
+                {
+                id: 'Fitaz',
+                head: 'Fitaz Community App',
+                content: `Developed a web application aimed at connecting people of common interest together, Fitaz web app was developed for people who love to get involved with fitness activities (jogging, cycling, indoor fitness training). Based on interest, the web app is divided into three modules, firstly people who are interested in joining a local fitness group created on the platform, secondly people who are only interested in contacting a fitness trainer and lastly people who wish to get information about fitness centres closest to them. Technologies: PHP OOP, Javascript, AJAX. 
+                url: `,
+                url: "http://www.emekaokwor.com/fitaz" 
+                },
+                {
+                id: "Wedamann",
+                head: 'Wedamann app',
+                content: `Developed a weather forecast app using NODEJS and DARK SKY API URL: `,
+                url: "https://www.emeka-wedamann-app.herokuapp.com" 
+                },
+            ]
+
+            //render divs with fadeIn animation    
+            $('#homeButton').click(function(){
+                var myCss = $("#landingPage").prop('style')
+                $('#about').addClass("disappear")
+                $('#aboutButton').removeClass("active")
+                $('#exp').addClass("disappear")
+                $('#expButton').removeClass("active")
+                $('#skill').addClass("disappear")
+                $('#skillButton').removeClass("active")
+                $("#landingPage").fadeIn(2000)
+                $("#landingPage").removeClass("disappear");
+                $('#homeButton').addClass("active")
+                myCss.removeProperty('display')
+            })
+
+            $('#aboutButton').click(function(){
+                var myCss = $("#about").prop('style')
+                $('#landingPage').addClass("disappear")
+                $('#homeButton').removeClass("active")
+                $('#exp').addClass("disappear")
+                $('#expButton').removeClass("active")
+                $('#skill').addClass("disappear")
+                $('#skillButton').removeClass("active")
+                $("#about").fadeIn(2000)
+                $("#about").removeClass("disappear")
+                $('#aboutButton').addClass("active")
+                myCss.removeProperty('display')
+                
+            })
+
+            $('#expButton').click(function(){
+                var myCss = $("#exp").prop('style')
+                $('#landingPage').addClass("disappear")
+                $('#homeButton').removeClass("active")
+                $('#about').addClass("disappear")
+                $('#aboutButton').removeClass("active")
+                $('#skill').addClass("disappear")
+                $('#skillButton').removeClass("active")
+                $("#exp").fadeIn(2000)
+                $("#exp").removeClass("disappear");
+                $('#expButton').addClass("active")
+                myCss.removeProperty('display')
+
+            })
+
+            $('#skillButton').click(function(){
+                var myCss = $("#skill").prop('style')
+                $('#landingPage').addClass("disappear")
+                $('#homeButton').removeClass("active")
+                $('#about').addClass("disappear")
+                $('#aboutButton').removeClass("active")
+                $('#exp').addClass("disappear")
+                $('#expButton').removeClass("active")
+                $("#skill").fadeIn(2000)
+                $("#skill").removeClass("disappear");
+                $('#skillButton').addClass("active")
+                myCss.removeProperty('display')
+            })
+
+          $("#close").click(function(){
+              var myStyle = $('#close').prop('style')
+            $("#nav__section").toggleClass("navActive")
+            $("#close").toggleClass("toggle")
+            if($('#close').hasClass('moveBtn')){
+                $('#close').css('left', '13.5rem')
+                myStyle.removeProperty('right')
+                $('#close').removeClass('moveBtn')
+
+            }else {
+                myStyle.removeProperty('left') 
+                $('#close').css('right', '0.1rem')
+                $('#close').addClass('moveBtn')
+            }
+            // $('#close').toggleClass('moveBtn')
+              
+          })
+
+            //initialization of variables for experience thread and modal view
+            var appendthis = ("<div class='modal-overlay js-modal-close'></div>");
+            var modalHead = $('#modal-head')[0]
+            var modalContent = $('#modal-content')[0]
+            var modalUrl = $('#modal-url')[0]
+            //loop through each experience thread and apply functions to each on click of thread
+            $.each(expThread, function(index, thread) {
+            $(`<div class='js-open-modal btn expThread' data-modal-id='myPopup' id=${thread.id}>
+            <h3>${thread.head}</h3>
+            </div>`).appendTo('#exp')
+
+
+
+            $('#'+ thread.id).click(function() {
+                
+                modalHead.textContent = thread.head
+                modalContent.textContent = thread.content
+                $(modalUrl).attr("href", thread.url)
+                modalUrl.textContent = `${thread.id}`
+
+                $("body").append(appendthis);
+                $(".modal-overlay").fadeTo(500, 0.7);
+                //$(".js-modalbox").fadeIn(500);
+                var modalBox = $(this).attr('data-modal-id');
+                $('#'+modalBox).fadeIn($(this).data());
+
+                $(".js-modal-close, .modal-overlay").click(function() {
+                    $(".modal-box, .modal-overlay").fadeOut(500, function() {
+                    $(".modal-overlay").remove();
+                    });
+
+                });
+        
+            
+            });
+
+           
+            
+        })
+        
+
+        $(window).resize(function() {
+        $(".modal-box").css({
+        top: ($(window).height() - $(".modal-box").outerHeight()) / 2,
+        left: ($(window).width() - $(".modal-box").outerWidth()) / 2
+        });
+        });
+
+        $(window).resize();
+
+        
+
+    })
+</script>
+</body>
+</html>
