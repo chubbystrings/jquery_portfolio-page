@@ -88,6 +88,22 @@
     <script>
         $(document).ready(function(){
 
+            function navOverlayToggle() {
+
+                $("#nav__section").toggleClass("navActive")
+                var myStyle = $('#close').prop('style')
+                myStyle.removeProperty('left') 
+                $('#close').css('right', '0.1rem')
+                $("#close").toggleClass("toggle")
+                $(".nav-overlay").fadeOut(500, function() {
+                    $('#close').addClass('moveBtn')
+                    $(".nav-overlay").remove();
+                });
+
+                return true
+                
+            }
+
             //experience thread array
             var expThread = [
                 {
@@ -107,13 +123,10 @@
 
             //render divs with fadeIn animation    
             $('#homeButton').click(function(){
+                navOverlayToggle()
                 var myCss = $("#landingPage").prop('style')
-                $('#about').addClass("disappear")
-                $('#aboutButton').removeClass("active")
-                $('#exp').addClass("disappear")
-                $('#expButton').removeClass("active")
-                $('#skill').addClass("disappear")
-                $('#skillButton').removeClass("active")
+                $('#about, #exp, #skill').addClass("disappear")
+                $('#aboutButton, #skillButton, #expButton').removeClass("active")
                 $("#landingPage").fadeIn(2000)
                 $("#landingPage").removeClass("disappear");
                 $('#homeButton').addClass("active")
@@ -121,13 +134,10 @@
             })
 
             $('#aboutButton').click(function(){
+                navOverlayToggle()
                 var myCss = $("#about").prop('style')
-                $('#landingPage').addClass("disappear")
-                $('#homeButton').removeClass("active")
-                $('#exp').addClass("disappear")
-                $('#expButton').removeClass("active")
-                $('#skill').addClass("disappear")
-                $('#skillButton').removeClass("active")
+                $('#landingPage, #exp, #skill').addClass("disappear")
+                $('#homeButton, #expButton, #skillButton').removeClass("active")
                 $("#about").fadeIn(2000)
                 $("#about").removeClass("disappear")
                 $('#aboutButton').addClass("active")
@@ -136,13 +146,10 @@
             })
 
             $('#expButton').click(function(){
+                navOverlayToggle()
                 var myCss = $("#exp").prop('style')
-                $('#landingPage').addClass("disappear")
-                $('#homeButton').removeClass("active")
-                $('#about').addClass("disappear")
-                $('#aboutButton').removeClass("active")
-                $('#skill').addClass("disappear")
-                $('#skillButton').removeClass("active")
+                $('#landingPage, #about, #skill').addClass("disappear")
+                $('#homeButton, #aboutButton, #skillButton').removeClass("active")
                 $("#exp").fadeIn(2000)
                 $("#exp").removeClass("disappear");
                 $('#expButton').addClass("active")
@@ -151,13 +158,10 @@
             })
 
             $('#skillButton').click(function(){
+                navOverlayToggle()
                 var myCss = $("#skill").prop('style')
-                $('#landingPage').addClass("disappear")
-                $('#homeButton').removeClass("active")
-                $('#about').addClass("disappear")
-                $('#aboutButton').removeClass("active")
-                $('#exp').addClass("disappear")
-                $('#expButton').removeClass("active")
+                $('#landingPage, #about, #exp').addClass("disappear")
+                $('#homeButton, #aboutButton, #expButton').removeClass("active")
                 $("#skill").fadeIn(2000)
                 $("#skill").removeClass("disappear");
                 $('#skillButton').addClass("active")
@@ -165,22 +169,31 @@
             })
 
           $("#close").click(function(){
-              var myStyle = $('#close').prop('style')
+            var myStyle = $('#close').prop('style')
             $("#nav__section").toggleClass("navActive")
             $("#close").toggleClass("toggle")
+            $('main').append("<div class='nav-overlay'></div>")
+            
             if($('#close').hasClass('moveBtn')){
+                $(".nav-overlay").fadeTo(500, 0.7);
                 $('#close').css('left', '13.5rem')
                 myStyle.removeProperty('right')
                 $('#close').removeClass('moveBtn')
 
             }else {
+                $(".nav-overlay").remove();
                 myStyle.removeProperty('left') 
                 $('#close').css('right', '0.1rem')
                 $('#close').addClass('moveBtn')
             }
-            // $('#close').toggleClass('moveBtn')
+            
+            $(".nav-overlay").click(function() {
+               navOverlayToggle();
+            });
               
           })
+
+         
 
             //initialization of variables for experience thread and modal view
             var appendthis = ("<div class='modal-overlay js-modal-close'></div>");
@@ -189,52 +202,52 @@
             var modalUrl = $('#modal-url')[0]
             //loop through each experience thread and apply functions to each on click of thread
             $.each(expThread, function(index, thread) {
-            $(`<div class='js-open-modal btn expThread' data-modal-id='myPopup' id=${thread.id}>
-            <h3>${thread.head}</h3>
-            </div>`).appendTo('#exp')
+                $(`<div class='js-open-modal btn expThread' data-modal-id='myPopup' id=${thread.id}>
+                <h3>${thread.head}</h3>
+                </div>`).appendTo('#exp')
 
 
 
-            $('#'+ thread.id).click(function() {
-                
-                modalHead.textContent = thread.head
-                modalContent.textContent = thread.content
-                $(modalUrl).attr("href", thread.url)
-                modalUrl.textContent = `${thread.id}`
+                $('#'+ thread.id).click(function() {
+                    
+                    modalHead.textContent = thread.head
+                    modalContent.textContent = thread.content
+                    $(modalUrl).attr("href", thread.url)
+                    modalUrl.textContent = `${thread.id}`
 
-                $("body").append(appendthis);
-                $(".modal-overlay").fadeTo(500, 0.7);
-                //$(".js-modalbox").fadeIn(500);
-                var modalBox = $(this).attr('data-modal-id');
-                $('#'+modalBox).fadeIn($(this).data());
+                    $("body").append(appendthis);
+                    $(".modal-overlay").fadeTo(500, 0.7);
+                    //$(".js-modalbox").fadeIn(500);
+                    var modalBox = $(this).attr('data-modal-id');
+                    $('#'+modalBox).fadeIn($(this).data());
 
-                $(".js-modal-close, .modal-overlay").click(function() {
-                    $(".modal-box, .modal-overlay").fadeOut(500, function() {
-                    $(".modal-overlay").remove();
+                    $(".js-modal-close, .modal-overlay").click(function() {
+                        $(".modal-box, .modal-overlay").fadeOut(500, function() {
+                        $(".modal-overlay").remove();
+                        });
+
                     });
-
-                });
-        
             
-            });
+                
+                });
 
            
             
+            })
+        
+
+            $(window).resize(function() {
+            $(".modal-box").css({
+            top: ($(window).height() - $(".modal-box").outerHeight()) / 2,
+            left: ($(window).width() - $(".modal-box").outerWidth()) / 2
+            });
+            });
+
+            $(window).resize();
+
+        
+
         })
-        
-
-        $(window).resize(function() {
-        $(".modal-box").css({
-        top: ($(window).height() - $(".modal-box").outerHeight()) / 2,
-        left: ($(window).width() - $(".modal-box").outerWidth()) / 2
-        });
-        });
-
-        $(window).resize();
-
-        
-
-    })
-</script>
+    </script>
 </body>
 </html>
