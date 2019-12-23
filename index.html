@@ -44,13 +44,13 @@
                     <img  src="/images/my_anime.png" alt="profile_picture"/>
                 </div> 
                 <p id="landingPage_text">Hello my name is Emeka, I am a fullstack developer
-                        and you are welcome to my page, please help yur self
+                    and you are welcome to my page, please help yur self
                 </p>
                 
             </div>
 
             <div id="about" class="about__me disappear" >
-                <h1>Hi I am Here</h1>
+                <h1>Sample Text</h1>
             </div>
             <div id="exp" class="experience disappear">
                 
@@ -66,11 +66,14 @@
                     <img src="/images/jquery.png" alt="Jquery"/>
                     <img src="/images/postgresql.png" alt="postgreSql"/>
                     
-                </div>
-                    
+                </div>     
             </div>
             
-            <div id="myPopup" class="modal-box">
+            
+    
+        </section>
+
+        <div id="myPopup" class="modal-box">
             <header> <a href="#" class="js-modal-close close">×</a>
             <h3 id="modal-head"></h3>
             </header>
@@ -78,9 +81,7 @@
             <p id="modal-content"></p>
             <P>URL: <a id="modal-url" href="" target="_blank"></a></P>
             </div>
-            </div>
-    
-        </section>
+        </div>
     </main>
    
     <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="crossorigin="anonymous"></script> -->
@@ -88,6 +89,7 @@
     <script>
         $(document).ready(function(){
 
+            //nav overlay function to close nav section
             function navOverlayToggle() {
 
                 $("#nav__section").toggleClass("navActive")
@@ -127,7 +129,7 @@
                 var myCss = $("#landingPage").prop('style')
                 $('#about, #exp, #skill').addClass("disappear")
                 $('#aboutButton, #skillButton, #expButton').removeClass("active")
-                $("#landingPage").fadeIn(2000)
+                $("#landingPage").slideDown(1000)
                 $("#landingPage").removeClass("disappear");
                 $('#homeButton').addClass("active")
                 myCss.removeProperty('display')
@@ -138,7 +140,7 @@
                 var myCss = $("#about").prop('style')
                 $('#landingPage, #exp, #skill').addClass("disappear")
                 $('#homeButton, #expButton, #skillButton').removeClass("active")
-                $("#about").fadeIn(2000)
+                $("#about").slideDown(1000)
                 $("#about").removeClass("disappear")
                 $('#aboutButton').addClass("active")
                 myCss.removeProperty('display')
@@ -150,7 +152,7 @@
                 var myCss = $("#exp").prop('style')
                 $('#landingPage, #about, #skill').addClass("disappear")
                 $('#homeButton, #aboutButton, #skillButton').removeClass("active")
-                $("#exp").fadeIn(2000)
+                $("#exp").slideDown(1000)
                 $("#exp").removeClass("disappear");
                 $('#expButton').addClass("active")
                 myCss.removeProperty('display')
@@ -162,12 +164,13 @@
                 var myCss = $("#skill").prop('style')
                 $('#landingPage, #about, #exp').addClass("disappear")
                 $('#homeButton, #aboutButton, #expButton').removeClass("active")
-                $("#skill").fadeIn(2000)
+                $("#skill").slideDown(1000)
                 $("#skill").removeClass("disappear");
                 $('#skillButton').addClass("active")
                 myCss.removeProperty('display')
             })
 
+        //nav section button toggler 
           $("#close").click(function(){
             var myStyle = $('#close').prop('style')
             $("#nav__section").toggleClass("navActive")

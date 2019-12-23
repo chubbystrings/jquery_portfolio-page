@@ -168,6 +168,7 @@ body {
     
     .modal-box {
         overflow-y: auto;
+        opacity: 0.9;
         display: none;
         position: absolute;
         z-index: 1000;
@@ -189,7 +190,7 @@ body {
     .modal-box header h3,
     .modal-box header h4,
     .modal-box .modal-header h3,
-    .modal-box .modal-header h4 { margin: 0; }
+    .modal-box .modal-header h4 { margin: 0; text-align: center;}
     
     .modal-box .modal-body { padding: 2em 1.5em; }
     
@@ -270,16 +271,17 @@ body {
         box-sizing: border-box;
         padding-top: 0.3rem;
         padding-left: 0.3rem;
-       margin: 0 auto;
+        padding-right: 0.3rem;
+        margin: 0 auto;
         width: 5rem;
         height: 5rem;
          
     }
     
-    .skillImages img:hover {
+    /* .skillImages img:hover {
         transform: translateY(-2rem);
         transition: transform 500ms
-    }
+    } */
     
     .closeBtn {
         z-index: 200;
@@ -426,7 +428,7 @@ body {
   }
 
 
-  @media(max-width: 398px){
+  @media(max-width: 399px){
 
     .content__section > div {
 
