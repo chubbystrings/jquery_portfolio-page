@@ -109,6 +109,21 @@
                 
             }
 
+            
+
+            function pageResize() {
+                var windowHeight = $(window).height()
+                var windowWidth = $(window).width()
+                if(windowWidth < 420 && windowHeight > 639){
+                    return 4
+                }
+                return 3
+            }
+
+           
+
+            
+
             //experience thread array
             var expThread = [
                 {
@@ -154,6 +169,7 @@
 
             //render divs with fadeIn animation    
             $('#homeButton').click(function(){
+                
                 navOverlayToggle()
                 var myCss = $("#landingPage").prop('style')
                 $('#about, #exp, #skill').addClass("disappear")
@@ -267,35 +283,38 @@
             
             })
 
-            var thread = $('.expThread')
-            var numberOfThread = expThread.length
-            var perPage = 3
-
-            thread.slice(perPage).hide();
-            if(numberOfThread != 0){
-                $(".pagination").pagination({
-                    items: numberOfThread,
-                    itemsOnPage: perPage,
-                    cssStyle: "compact-theme",
-                    onPageClick: function(pageNumber) { 
-                        var showFrom = perPage * (pageNumber - 1);
-                        var showTo = showFrom + perPage;
-                        thread.hide().slice(showFrom, showTo).fadeIn(1500);
-                    }
-                });
+            function paginatePage (perPage){
+                var thread = $('.expThread')
+                var numberOfThread = expThread.length
+                thread.slice(perPage).hide();
+                if(numberOfThread != 0){
+                    $(".pagination").pagination({
+                        items: numberOfThread,
+                        itemsOnPage: perPage,
+                        cssStyle: "compact-theme",
+                        onPageClick: function(pageNumber) { 
+                            var showFrom = perPage * (pageNumber - 1);
+                            var showTo = showFrom + perPage;
+                            thread.hide().slice(showFrom, showTo).fadeIn(1500);
+                        }
+                    });
+                }
             }
-
-            $(window).resize(function() {
-            $(".modal-box").css({
-            top: ($(window).height() - $(".modal-box").outerHeight()) / 2,
-            left: ($(window).width() - $(".modal-box").outerWidth()) / 2
-            });
-            });
-
-            $(window).resize();
-
+           
+            var Page = pageResize()
+            paginatePage(Page)
+            
         
+            $(window).resize(function() {
+                var page = pageResize()
+                paginatePage(page)
+                $(".modal-box").css({
+                top: ($(window).height() - $(".modal-box").outerHeight()) / 2,
+                left: ($(window).width() - $(".modal-box").outerWidth()) / 2
+                });
+            });
 
+            $(window).resize()
         })
     </script>
 </body>
